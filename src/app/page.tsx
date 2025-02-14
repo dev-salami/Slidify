@@ -1,9 +1,15 @@
-"use client"
-import React, { useState, useEffect, useCallback } from 'react';
+"use client";
+import React, { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shuffle } from 'lucide-react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Shuffle } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface PuzzlePiece {
   id: number;
@@ -14,7 +20,7 @@ const SlidingPuzzle = () => {
   const [gridSize, setGridSize] = useState(4);
   const [pieces, setPieces] = useState<PuzzlePiece[]>([]);
   const [emptyPos, setEmptyPos] = useState(0);
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [isWon, setIsWon] = useState(false);
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
@@ -25,6 +31,7 @@ const SlidingPuzzle = () => {
   // Initialize puzzle
   useEffect(() => {
     initializePuzzle();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gridSize]);
 
   // Timer effect
@@ -32,7 +39,7 @@ const SlidingPuzzle = () => {
     let interval: NodeJS.Timeout;
     if (isPlaying && !isWon) {
       interval = setInterval(() => {
-        setTime(prev => prev + 1);
+        setTime((prev) => prev + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -42,7 +49,7 @@ const SlidingPuzzle = () => {
     const totalPieces = gridSize * gridSize - 1;
     const initialPieces = Array.from({ length: totalPieces }, (_, index) => ({
       id: index + 1,
-      currentPos: index
+      currentPos: index,
     }));
     setPieces(initialPieces);
     setEmptyPos(totalPieces);
@@ -56,13 +63,17 @@ const SlidingPuzzle = () => {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   // Check if puzzle is in won state
   const checkWinCondition = useCallback(() => {
-    return pieces.every(piece => piece.currentPos === piece.id - 1) && 
-           emptyPos === (gridSize * gridSize - 1);
+    return (
+      pieces.every((piece) => piece.currentPos === piece.id - 1) &&
+      emptyPos === gridSize * gridSize - 1
+    );
   }, [pieces, emptyPos, gridSize]);
 
   // Check if move is valid (adjacent to empty space)
@@ -86,8 +97,8 @@ const SlidingPuzzle = () => {
       setIsPlaying(true);
     }
 
-    setPieces(prev => {
-      const newPieces = prev.map(piece => {
+    setPieces((prev) => {
+      const newPieces = prev.map((piece) => {
         if (piece.currentPos === piecePos) {
           return { ...piece, currentPos: emptyPos };
         }
@@ -97,7 +108,7 @@ const SlidingPuzzle = () => {
     });
 
     setEmptyPos(piecePos);
-    setMoveCount(prev => prev + 1);
+    setMoveCount((prev) => prev + 1);
   };
 
   // Effect to check win condition after each move
@@ -111,15 +122,20 @@ const SlidingPuzzle = () => {
   // Shuffle pieces
   const shufflePuzzle = () => {
     const totalPositions = gridSize * gridSize;
-    const availablePositions = Array.from({ length: totalPositions }, (_, i) => i);
+    const availablePositions = Array.from(
+      { length: totalPositions },
+      (_, i) => i
+    );
     const newPieces = [...pieces];
     let newEmptyPos = totalPositions - 1;
 
     // Fisher-Yates shuffle
     for (let i = availablePositions.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [availablePositions[i], availablePositions[j]] = 
-      [availablePositions[j], availablePositions[i]];
+      [availablePositions[i], availablePositions[j]] = [
+        availablePositions[j],
+        availablePositions[i],
+      ];
     }
 
     // Assign new positions to pieces
@@ -153,7 +169,7 @@ const SlidingPuzzle = () => {
     const originalCol = (id - 1) % gridSize;
     return {
       x: originalCol * PIECE_SIZE,
-      y: originalRow * PIECE_SIZE
+      y: originalRow * PIECE_SIZE,
     };
   };
 
@@ -163,7 +179,7 @@ const SlidingPuzzle = () => {
         <div className="flex items-center gap-4 w-full justify-between mb-4">
           <div className="flex items-center gap-2">
             <span className="font-bold">Difficulty:</span>
-            <Select 
+            <Select
               onValueChange={(value) => setGridSize(Number(value))}
               defaultValue="4"
             >
@@ -177,7 +193,7 @@ const SlidingPuzzle = () => {
               </SelectContent>
             </Select>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <div className="text-sm">
               Time: <span className="font-mono">{formatTime(time)}</span>
@@ -194,25 +210,27 @@ const SlidingPuzzle = () => {
           onChange={handleImageUpload}
           className="mb-4"
         />
-        
-        <div 
-          className="relative w-[400px] h-[400px] border-2 border-gray-200"
-        >
+
+        <div className="relative w-[400px] h-[400px] border-2 border-gray-200">
           {pieces.map((piece) => {
             const bgPos = getBackgroundPosition(piece.id);
             return (
               <div
                 key={piece.id}
                 className={`absolute transition-all duration-200
-                  ${isValidMove(piece.currentPos) ? 'cursor-pointer hover:scale-105' : 'cursor-default'}`}
+                  ${
+                    isValidMove(piece.currentPos)
+                      ? "cursor-pointer hover:scale-105"
+                      : "cursor-default"
+                  }`}
                 style={{
                   width: PIECE_SIZE,
                   height: PIECE_SIZE,
                   left: (piece.currentPos % gridSize) * PIECE_SIZE,
                   top: Math.floor(piece.currentPos / gridSize) * PIECE_SIZE,
-                  backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
+                  backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
                   backgroundPosition: `-${bgPos.x}px -${bgPos.y}px`,
-                  backgroundSize: '400px 400px',
+                  backgroundSize: "400px 400px",
                 }}
                 onClick={() => movePiece(piece.currentPos)}
               >
@@ -226,18 +244,15 @@ const SlidingPuzzle = () => {
           })}
         </div>
 
-        <Button
-          onClick={shufflePuzzle}
-          className="mt-4"
-          variant="outline"
-        >
+        <Button onClick={shufflePuzzle} className="mt-4" variant="outline">
           <Shuffle className="mr-2 h-4 w-4" />
           Shuffle
         </Button>
 
         {isWon && (
           <div className="text-green-600 font-bold mt-4">
-            Congratulations! You solved the puzzle in {moveCount} moves and {formatTime(time)}!
+            Congratulations! You solved the puzzle in {moveCount} moves and{" "}
+            {formatTime(time)}!
           </div>
         )}
       </div>

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { chains, getChainType } from "@/utils/chains";
+import { getGeneratedImageUrl } from "@/utils/image";
 
 const Navbar = () => {
   const [mounted, setMounted] = useState(false);
@@ -120,6 +121,11 @@ const Navbar = () => {
             </DropdownMenu>
           )}
         </div>
+
+        <button onClick={( async ()=> {
+            const res = await  getGeneratedImageUrl(4)
+            console.log(res)
+        })}>TEST</button>
 
         <div className="flex items-center space-x-4">
           {isConnected ? (
