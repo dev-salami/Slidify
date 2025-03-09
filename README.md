@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SlideScape: A Decentralized Image Sliding Puzzle Game
 
-## Getting Started
+🚀 **Core Blockchain Hackathon Project**
 
-First, run the development server:
+**SlideScape** is a fun and interactive **image sliding puzzle game** built on the **Core Blockchain**. Players can solve puzzles by sliding tiles to recreate the original image, with their progress and achievements securely recorded on-chain.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 🧩 **Dynamic Puzzle Generation**: Unique puzzles created from uploaded images.
+- 🔒 **On-Chain Progress Tracking**: Player achievements and scores stored on the Core Blockchain.
+- 🎮 **Play-to-Earn Mechanics**: Earn rewards for solving puzzles and competing on leaderboards.
+- 🌐 **Decentralized & Transparent**: Built on Core Blockchain for trustless and verifiable gameplay.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Smart Contracts**: Solidity (Core Blockchain)
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js (for off-chain logic)
+- **Blockchain Integration**: Viem, Wagmi
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How It Works
 
-## Deploy on Vercel
+1. Players upload an image, which is split into a sliding puzzle.
+2. They solve the puzzle by sliding tiles into the correct positions.
+3. Progress and achievements are recorded on-chain, ensuring transparency and immutability.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Get Started
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/dev-salami/Slidify.git
+   ```

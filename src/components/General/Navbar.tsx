@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import {
   useAccount,
@@ -26,7 +26,7 @@ const Navbar = () => {
   const { disconnect } = useDisconnect();
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
-  
+
   // Simplified balance hook configuration
   const { data: balance } = useBalance({
     address: address,
@@ -42,7 +42,10 @@ const Navbar = () => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
-  const formatBalance = (balance: bigint | undefined, decimals: number | undefined) => {
+  const formatBalance = (
+    balance: bigint | undefined,
+    decimals: number | undefined
+  ) => {
     if (!balance || !decimals) return "0";
     const numberValue = Number(balance) / Math.pow(10, decimals);
     return numberValue.toFixed(4);
@@ -59,7 +62,7 @@ const Navbar = () => {
   const handleNetworkSwitch = async (targetChainId: number) => {
     try {
       await switchChain({ chainId: targetChainId });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // If the network doesn't exist in the wallet, add it
       const targetChain = chains.find((chain) => chain.id === targetChainId);
@@ -122,10 +125,14 @@ const Navbar = () => {
           )}
         </div>
 
-        <button onClick={( async ()=> {
-            const res = await  getGeneratedImageUrl(4)
-            console.log(res)
-        })}>TEST</button>
+        <button
+          onClick={async () => {
+            const res = await getGeneratedImageUrl(4);
+            console.log(res);
+          }}
+        >
+          TEST
+        </button>
 
         <div className="flex items-center space-x-4">
           {isConnected ? (
@@ -135,9 +142,10 @@ const Navbar = () => {
                   {truncateAddress(address as string)}
                 </span>
                 <span className="text-xs text-gray-600">
-                  {formatBalance(balance?.value, balance?.decimals)} {balance?.symbol}
+                  {formatBalance(balance?.value, balance?.decimals)}{" "}
+                  {balance?.symbol}
                 </span>
-               </div>
+              </div>
               <Button variant="outline" onClick={() => disconnect()}>
                 Disconnect
               </Button>

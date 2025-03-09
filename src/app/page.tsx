@@ -20,7 +20,9 @@ const SlidingPuzzle = () => {
   const [gridSize, setGridSize] = useState(4);
   const [pieces, setPieces] = useState<PuzzlePiece[]>([]);
   const [emptyPos, setEmptyPos] = useState(0);
-  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>(
+    "https://images.unsplash.com/photo-1432611185496-76ccd1dc5efe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDk1ODB8MHwxfHNlYXJjaHw1fHxjaXR5fGVufDB8Mnx8fDE3NDAwNjE4NzZ8MA&ixlib=rb-4.0.3&q=80&w=1080"
+  );
   const [isWon, setIsWon] = useState(false);
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
@@ -31,7 +33,7 @@ const SlidingPuzzle = () => {
   // Initialize puzzle
   useEffect(() => {
     initializePuzzle();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gridSize]);
 
   // Timer effect

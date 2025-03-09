@@ -34,8 +34,10 @@ export const coreTestnet = {
     symbol: "tCORE",
   },
   rpcUrls: {
-    public: { http: ["https://rpc.test.btcs.network"] },
-    default: { http: ["https://rpc.test.btcs.network"] },
+    public: { http: ["https://core-testnet.drpc.org"] },
+    default: { http: ["https://core-testnet.drpc.org"] },
+    // public: { http: ["https://rpc.test.btcs.network"] },
+    // default: { http: ["https://rpc.test.btcs.network"] },
   },
   blockExplorers: {
     etherscan: {
